@@ -1,0 +1,41 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.table {
+   background-color:lightyellow;
+}
+h5,h1,h4 {
+    text-align: center;
+}
+a {
+    font-weight:bold;
+}
+td,th {
+    text-align: center;
+}
+footer {
+    background-color:lightblue;
+}
+button {
+    color:red;
+}
+
+}
+
+
+

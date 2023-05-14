@@ -1,0 +1,83 @@
+﻿@model PetShop.Client.Models.CategoriesViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href='https://fonts.googleapis.com/css?family=Alegreya' rel='stylesheet' />
+
+<h1 style="font-family:Alegreya;color:red">Administrator</h1>
+
+
+<ul>
+<li><div><a asp-controller="Home" asp-action="Index">Home Page <i class='fas fa-home' style="color:black"></i></a></div></li>
+<li> <div><a asp-controller="Animals" asp-action="Index">Go To Catalog <i class='fas fa-book-reader' style="color:green"></i></a></div></li>
+</ul>
+
+<div><a asp-controller="Animals" asp-action="Create" style="color:orange;position:absolute;right:150px" >Add New Pet</a></div>
+
+<form asp-controller="Admin" asp-action="Index" enctype="multipart/form-data" method="post">
+   <div class="form-group">
+     <label class="control-label"></label>
+        <select asp-action="Catalog" asp-for=Category  asp-items="ViewBag.CategoryId" >
+           <option>Choose Category</option>
+        </select>
+     <input type="submit" value= "Select" class="btn btn-primary"/>
+   </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.First().Name)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Animals.First().PhotoUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.First().BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.First().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.First().Category)
+            </th>
+            <th>
+               No. Of Comments
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Animals) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <img src="/Photos/@item.Category.Name/@item.PhotoUrl" height="50"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments.Count)
+            </td>
+            <td>
+                <a asp-controller="Animals" asp-action="Edit" asp-route-id="@item.AnimalId">Edit <i class='fas fa-edit' style="color:grey"></i></a>|
+                <a asp-controller="Animals" asp-action="Details" asp-route-id="@item.AnimalId">Details <span class='bi bi-info-circle-fill'></span></a>|
+                <a asp-controller="Animals" asp-action="Delete" asp-route-id="@item.AnimalId">Delete <i class='fas fa-trash-alt' style="color:red"></i></a>|
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</form>
+
+

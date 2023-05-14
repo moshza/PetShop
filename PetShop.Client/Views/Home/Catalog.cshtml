@@ -1,0 +1,66 @@
+﻿@model PetShop.Client.Models.CategoriesViewModel
+
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<h1>Catalog</h1>
+<form asp-controller="Home" asp-action="Catalog" enctype="multipart/form-data" method="post">
+   <div class="form-group">
+     <label class="control-label"></label>
+        <select asp-action="Catalog" asp-for=Category  asp-items="ViewBag.CategoryId" >
+           <option>Select category</option>
+        </select>
+     <input type="submit" value= "Filter" class="btn btn-primary"/>
+   </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.First().PhotoUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.First().Name)
+            </th>
+            <th>
+                Find out more and Comment
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.Animals.First().BirthDate)
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.Animals.First().Description)
+            </th class="hidden">
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.Animals.First().Category)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model.Animals) {
+        <tr>
+            <td>
+                <img src="/Photos/@item.Category.Name/@item.PhotoUrl" style="width:18rem"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+              <a asp-controller="Animal" asp-action="AddComment" asp-route-id="@item.AnimalId"> Details </a> |
+            </td>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+        </tr>
+}
+    </tbody>
+ </table>
+</form>
