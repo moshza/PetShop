@@ -12,17 +12,23 @@ namespace PetShop.data.Repositories
         }
         public Category Add(Category entity)
         {
-            throw new NotImplementedException();
+            _context.Categories.Add(entity);
+            _context.SaveChanges();
+
+            return entity;
         }
 
         public Category Delete(int id)
         {
-            throw new NotImplementedException();
+            var category = _context.Categories.Single(c => c.CategoryId == id);
+            _context.Remove(category);
+            _context.SaveChanges();
+            return category;
         }
 
         public Category Get(int? id)
         {
-            throw new NotImplementedException();
+            return _context.Categories.SingleOrDefault(c => c.CategoryId == id)!;
         }
 
         public IQueryable<Category> GetAll()
